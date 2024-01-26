@@ -12,7 +12,7 @@ function HomePage() {
   const { posts, totalPages, getPosts, deletePost, isError, isLoading } =
     usePosts();
 
-  console.log(totalPages);
+  // console.log(totalPages);
 
   useEffect(() => {
     getPosts({ status, keywords, page });
@@ -92,7 +92,9 @@ function HomePage() {
 
               <button
                 className="delete-button"
-                onClick={() => deletePost(post.post_id)}
+                onClick={() =>
+                  deletePost(post.post_id, { status, keywords, page })
+                }
               >
                 x
               </button>

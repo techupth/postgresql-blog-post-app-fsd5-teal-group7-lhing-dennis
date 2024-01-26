@@ -18,6 +18,8 @@ const usePosts = () => {
       params.append("keywords", keywords);
       params.append("page", page);
       setIsError(false);
+      console.log(params.page);
+      console.log(params.toString());
       setIsLoading(true);
       const results = await axios.get(
         `http://localhost:4000/posts?${params.toString()}`
@@ -31,15 +33,16 @@ const usePosts = () => {
     }
   };
 
-  const deletePost = async (postId) => {
+  const deletePost = async (postId, item) => {
     try {
       setIsError(false);
       setIsLoading(true);
       await axios.delete(`http://localhost:4000/posts/${postId}`);
-      const newPosts = posts.filter((post) => {
-        return post.post_id !== postId;
-      });
-      setPosts(newPosts);
+      // const newPosts = posts.filter((post) => {
+      //   return post.post_id !== postId;
+      // });
+      getPosts(item);
+      // setPosts(newPosts);
       setIsLoading(false);
     } catch (error) {
       setIsError(true);
